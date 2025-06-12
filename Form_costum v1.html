@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario de Cliente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1c1c1c, #005f73);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    h2 {
+      color: white;
+      margin: 15px 0;
+    }
+    img.logo {
+      max-width: 120px;
+      margin-bottom: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 5px;
+      background-color: #1c1c1c;
+      color: white;
+      font-size: 14px;
+    }
+    input::placeholder, select {
+      color: #cccccc;
+    }
+    button {
+      background-color: #00b4d8;
+      color: white;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0077b6;
+    }
+    label {
+      color: white;
+      font-size: 13px;
+    }
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 15px 0 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <img src="logo_formulario.png" alt="Logo" class="logo" />
+  <h2>REGISTRO DE CLIENTES</h2>
+  <form id="formularioCliente">
+    <input type="text" name="nombre" placeholder="Nombre completo" required />
+
+    <select name="servicio" required>
+      <option value="">Seleccione un servicio</option>
+      <option value="Flushing">Flushing</option>
+      <option value="Antigrasa">Antigrava</option>
+      <option value="Detailing">Detailing</option>
+      <option value="Lavados">Lavados</option>
+      <option value="Enderezado y Pintura">Enderezado y Pintura</option>
+      <option value="Pulidos y Lustras">Pulidos y Lustras</option>
+      <option value="Otros servicios Premium">Otros servicios Premium</option>
+    </select>
+
+    <input type="email" name="correo" placeholder="Correo electrónico" required />
+    <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
+
+    <div class="checkbox">
+      <input type="checkbox" id="terminos" required />
+      <label for="terminos">Acepto los Términos y Condiciones</label>
+    </div>
+
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("formularioCliente").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const datos = new FormData(this);
+    const url = "https://script.google.com/macros/s/AKfycbzQmdyEg5Ig7HF8I7C0JZVTDmcrECeBLbxPyNoYcYbQF5o5Px2wRz_fA7VVICPmbEkvow/exec";
+
+    fetch(url, {
+      method: "POST",
+      body: datos,
+    }).then(res => {
+      if (res.ok) {
+        alert("Datos enviados correctamente.");
+        this.reset();
+      } else {
+        alert("Hubo un error al enviar.");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
