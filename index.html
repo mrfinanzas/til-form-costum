@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,19 +13,21 @@
       box-sizing: border-box;
     }
     body, html {
-      height: 100%;
+      height: 100vh;
       overflow: hidden;
     }
     .slideshow {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: -2;
     }
     .slideshow img {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -43,7 +44,7 @@
       padding: 30px;
       width: 90%;
       max-width: 400px;
-      margin: 100px auto;
+      margin: 50px auto;
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       text-align: center;
       color: white;
@@ -53,8 +54,13 @@
       max-width: 100px;
       margin-bottom: 10px;
     }
+    h1 {
+      margin: 10px 0;
+      font-size: 1.5em;
+    }
     h2 {
       margin-bottom: 20px;
+      font-size: 1.2em;
     }
     input, select, button {
       width: 100%;
@@ -91,8 +97,7 @@
       gap: 8px;
       font-size: 13px;
       color: white;
-      margin-top: 10px;
-      margin-bottom: 20px;
+      margin: 10px 0;
       text-align: left;
     }
   </style>
@@ -114,7 +119,6 @@
   <h2>REGISTRO COTIZACIONES TIL EXPANSIÓN</h2>
   <form id="formularioCliente">
     <input type="text" name="nombre" placeholder="Nombre completo" required />
-
     <select name="servicio" required>
       <option value="">Seleccione un servicio</option>
       <option value="Flushing">Flushing</option>
@@ -122,18 +126,15 @@
       <option value="Detailing">Detailing</option>
       <option value="Lavados">Lavados</option>
       <option value="Enderezado y Pintura">Enderezado y Pintura</option>
-      <option value="Pulidos y Lustras">Pulidos y Lustrados</option>
+      <option value="Pulidos y Lustrados">Pulidos y Lustrados</option>
       <option value="Otros servicios Premium">Otros servicios Premium</option>
     </select>
-
     <input type="email" name="correo" placeholder="Correo electrónico" required />
     <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
-
     <div class="checkbox">
       <input type="checkbox" id="terminos" required />
       <label for="terminos">Acepto Términos y Condiciones</label>
     </div>
-
     <button type="submit">Cotizar servicios</button>
   </form>
 </div>
@@ -141,29 +142,24 @@
 <script>
   const images = document.querySelectorAll('.slideshow img');
   let index = 0;
-
   setInterval(() => {
     images[index].classList.remove('active');
     index = (index + 1) % images.length;
     images[index].classList.add('active');
   }, 7000);
-
   document.getElementById("formularioCliente").addEventListener("submit", function (e) {
     e.preventDefault();
     const datos = new FormData(this);
     const url = "https://script.google.com/macros/s/AKfycbzQmdyEg5Ig7HF8I7C0JZVTDmcrECeBLbxPyNoYcYbQF5o5Px2wRz_fA7VVICPmbEkvow/exec";
-
-    fetch(url, {
-      method: "POST",
-      body: datos,
-    }).then(res => {
-      if (res.ok) {
-        alert("Datos enviados correctamente, en Seguida te Contactamos");
-        this.reset();
-      } else {
-        alert("Hubo un error al enviar, verifique la información adjunta");
-      }
-    });
+    fetch(url, { method: "POST", body: datos })
+      .then(res => { 
+        if (res.ok) { 
+          alert("Datos enviados correctamente, en Seguida te Contactamos"); 
+          this.reset(); 
+        } else { 
+          alert("Hubo un error al enviar, verifique la información adjunta"); 
+        } 
+      });
   });
 </script>
 
