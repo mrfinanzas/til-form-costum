@@ -62,7 +62,7 @@
     .modal-overlay {
       position: fixed; top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.10);
+      background: rgba(0,0,0,0.7);
       display: none; align-items: center; justify-content: center;
       z-index: 2;
     }
@@ -71,14 +71,14 @@
       padding: 20px; border-radius: 8px;
       max-width: 90%; max-height: 80%; overflow-y: auto;
       position: relative;
+      text-align: center;
     }
     .modal-content h3 { margin-top: 0; }
     .modal-close {
       position: absolute; top: 10px; right: 10px;
       background: rgba(255,255,255,0.8); border: none;
-      font-size: 24px; border-radius: 50%;
-      width: 32px; height: 32px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; border-radius: 50%; width: 32px; height: 32px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
     .modal-close:hover { background: rgba(255,255,255,1); }
     .footer-container {
@@ -122,7 +122,7 @@
       <option value="Pulidos y Lustrados">Pulidos y Lustrados</option>
       <option value="Otros servicios Premium">Otros servicios Premium</option>
     </select>
-    <input type="text" tipo="tipo" placeholder="Tipo de Vehículo (Ej. Ford F-350 Lariat 2023)" required />    
+    <input type="text" name="tipo" placeholder="Tipo de Vehículo (Ej. Ford F-350 Lariat 2023)" required />
     <input type="email" name="correo" placeholder="Correo electrónico" required />
     <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
     <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
@@ -136,8 +136,8 @@
 
 <div class="footer-container">
   <p>TIL EXPANSIÓN - ¡DETAILS NEVER DIE!</p>
-  <p>Centro de Operaciones: <a href="https://waze.com/ul/h9fxehmh57" target="_blank">31-60 11 Avenida B, Zona 5, Guatemala</a></p>
-  <p>Centro de Operaciones: <a href="https://waze.com/ul/h9fxe74q70" target="_blank">18-43 6a Calle, Zona 4, Mixco</a></p>
+  <p>Centro de Operaciones Z5: <a href="https://waze.com/ul/h9fxehmh57" target="_blank">31-60 11 Avenida B, Zona 5, Guatemala</a></p>
+  <p>Centro de Operaciones Mixco: <a href="https://waze.com/ul/h9fxe74q70" target="_blank">18-43 6a Calle, Zona 4, Mixco</a></p>
   <p>Contacto: <a href="mailto:tilexpansiongerencia@gmail.com">tilexpansiongerencia@gmail.com</a> | Tel: 3566 1743</p>
 </div>
 
@@ -150,61 +150,40 @@
 
 <script>
   // Slideshow
-  const images = document.querySelectorAll('.slideshow img'); let index = 0;
-  setInterval(() => { images[index].classList.remove('active'); index = (index + 1) % images.length; images[index].classList.add('active'); }, 7000);
-
+  const images = document.querySelectorAll('.slideshow img'); let idx=0;
+  setInterval(() => { images[idx].classList.remove('active'); idx=(idx+1)%images.length; images[idx].classList.add('active'); }, 7000);
+  
   // Modal
-  const overlay = document.getElementById('modalOverlay');
-  const modalText = document.getElementById('modalText');
-  const closeBtn = document.getElementById('modalClose');
-  document.getElementById('linkPrivacy').addEventListener('click', e => {
+  const overlay=document.getElementById('modalOverlay');
+  const modalText=document.getElementById('modalText');
+  const closeBtn=document.getElementById('modalClose');
+  document.getElementById('linkPrivacy').addEventListener('click',e=>{
     e.preventDefault();
-    modalText.innerHTML = `<h3>Política de Privacidad</h3>
-      <p>Tu privacidad es importante para nosotros. Cualquier información que nos proporciones, como tu nombre o correo electrónico, se utilizará únicamente para contactarte en relación con nuestros servicios o productos. Te garantizamos que tu información no será compartida, vendida ni distribuida a terceros bajo ninguna circunstancia.</p>`;
-    overlay.style.display = 'flex';
+    modalText.innerHTML=`<h3>Política de Privacidad</h3><p>Tu privacidad es importante para nosotros. Cualquier información que nos proporciones, como tu nombre o correo electrónico, se utilizará únicamente para contactarte en relación con nuestros servicios o productos. Te garantizamos que tu información no será compartida, vendida ni distribuida a terceros bajo ninguna circunstancia. Además, implementamos medidas de seguridad técnicas y organizativas para proteger tus datos.</p>`;
+    overlay.style.display='flex';
   });
-  document.getElementById('linkTerms').addEventListener('click', e => {
+  document.getElementById('linkTerms').addEventListener('click',e=>{
     e.preventDefault();
-    modalText.innerHTML = `<h3>Términos y Condiciones</h3>
-    <ul><li><strong>Uso del Servicio:</strong> Nuestros servicios están diseñados para mantenimientos y correcciones según evaluaciones previas a todo tipo de vehículos. Te comprometes a utilizarlos de manera lícita y respetuosa.</li>
-        <li><strong>Información de Contacto:</strong> La información que nos proporciones (como nombre, correo electrónico) se utilizará únicamente para comunicarnos contigo en relación con el servicio o producto que te interese. No compartiremos esta información con terceros, tal como se detalla en nuestra Política de Privacidad.</li>
-        <li><strong>Modificaciones:</strong> Nos reservamos el derecho de modificar estos términos en cualquier momento. Cualquier cambio será efectivo al ser publicado en nuestro sitio web o comunicado por otros medios.</li>
-        <li><strong>Limitación de Responsabilidad:</strong> Hacemos nuestro mejor esfuerzo por mantener la información precisa, pero no garantizar la disponibilidad continua ni la ausencia de errores en el servicio (Consulte sobre nuestros términos de cobertura de garantías).</li></ul>`;
-    overlay.style.display = 'flex';
+    modalText.innerHTML=`<h3>Términos y Condiciones</h3><p>Al utilizar nuestros servicios, aceptas los siguientes términos:</p><ul><li><strong>Uso del Servicio:</strong> Nuestros servicios están diseñados para mantenimientos y correcciones según evaluaciones previas a todo tipo de vehículos. Te comprometes a utilizarlos de manera lícita y respetuosa.</li><li><strong>Información de Contacto:</strong> La información que nos proporciones se usará únicamente para comunicarnos contigo respecto al servicio solicitado y no será compartida con terceros.</li><li><strong>Modificaciones:</strong> Nos reservamos el derecho de modificar estos términos en cualquier momento, efectivos al publicarlos en nuestro sitio o comunicar por otros medios.</li><li><strong>Limitación de Responsabilidad:</strong> Aunque buscamos precisión, no garantizamos disponibilidad continua ni ausencia de errores.</li></ul>`;
+    overlay.style.display='flex';
   });
-  closeBtn.addEventListener('click', () => overlay.style.display = 'none');
-  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
-
-  // Form submit with loading and prevention
-  const form = document.getElementById('formularioCliente');
-  let isSubmitting = false;
-  form.addEventListener('submit', function(e) {
+  closeBtn.addEventListener('click',()=>overlay.style.display='none');overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.style.display='none';});
+  
+  // Form submit con bloqueo y ventana de carga
+  const form=document.getElementById('formularioCliente');
+  let isSending=false;
+  form.addEventListener('submit',function(e){
     e.preventDefault();
-    if (this.honeypot.value) return;
-    if (isSubmitting) return;
-    isSubmitting = true;
-    const btn = this.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    // show loading modal
-    modalText.innerHTML = `<h3>Enviando datos...</h3><p>Un momento, por favor.</p>`;
-    overlay.style.display = 'flex';
-    const datos = new FormData(this);
-    fetch("https://script.google.com/macros/s/AKfycbzQmdyEg5Ig7HF8I7C0JZVTDmcrECeBLbxPyNoYcYbQF5o5Px2wRz_fA7VVICPmbEkvow/exec", {
-      method: 'POST',
-      body: datos
+    if(this.honeypot.value||isSending)return;
+    isSending=true;
+    const btn=this.querySelector('button[type="submit"]');btn.disabled=true;
+    modalText.innerHTML=`<h3>Enviando datos...</h3><p>Un momento, por favor.</p>`;overlay.style.display='flex';
+    fetch('https://script.google.com/macros/s/AKfycbzQmdyEg5Ig7HF8I7C0JZVTDmcrECeBLbxPyNoYcYbQF5o5Px2wRz_fA7VVICPmbEkvow/exec',{
+      method:'POST',body:new FormData(this)
     })
-    .then(res => {
-      if (res.ok) modalText.innerHTML = `<h3>Gracias</h3><p>Datos enviados correctamente, te contactaremos lo más pronto posible.</p>`;
-      else modalText.innerHTML = `<h3>Error</h3><p>Hubo un error al enviar, verifique la información adjunta.</p>`;
-    })
-    .catch(() => {
-      modalText.innerHTML = `<h3>Error</h3><p>Ocurrió un error de red.</p>`;
-    })
-    .finally(() => {
-      isSubmitting = false;
-      btn.disabled = false;
-      this.reset();
-    });
+    .then(res=>res.ok?modalText.innerHTML=`<h3>Gracias</h3><p>Datos enviados correctamente, te contactaremos pronto.</p>`:modalText.innerHTML=`<h3>Error</h3><p>No se pudieron enviar los datos.</p>`)
+    .catch(()=>modalText.innerHTML=`<h3>Error</h3><p>Error de red.</p>`)
+    .finally(()=>{isSending=false;btn.disabled=false;this.reset();});
   });
 </script>
 
