@@ -110,7 +110,7 @@
 
 <div class="form-container">
   <img src="logo_formulario.png" alt="Logo" class="logo" />
-  <h2>REGISTRO DE CLIENTES</h2>
+  <h2>REGISTRO COTIZACIONES TIL EXPANSIÓN</h2>
   <form id="formularioCliente">
     <input type="text" name="nombre" placeholder="Nombre completo" required />
 
@@ -121,7 +121,7 @@
       <option value="Detailing">Detailing</option>
       <option value="Lavados">Lavados</option>
       <option value="Enderezado y Pintura">Enderezado y Pintura</option>
-      <option value="Pulidos y Lustras">Pulidos y Lustras</option>
+      <option value="Pulidos y Lustras">Pulidos y Lustrados</option>
       <option value="Otros servicios Premium">Otros servicios Premium</option>
     </select>
 
@@ -133,7 +133,7 @@
       <label for="terminos">Acepto los Términos y Condiciones</label>
     </div>
 
-    <button type="submit">Enviar</button>
+    <button type="submit">Cotizar servicios</button>
   </form>
 </div>
 
@@ -157,10 +157,10 @@
       body: datos,
     }).then(res => {
       if (res.ok) {
-        alert("Datos enviados correctamente.");
+        alert("Datos enviados correctamente, en Seguida te Contactamos");
         this.reset();
       } else {
-        alert("Hubo un error al enviar.");
+        alert("Hubo un error al enviar, verifique la información adjunta");
       }
     });
   });
