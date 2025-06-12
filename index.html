@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { height: 100vh; overflow: hidden; }
+    body, html { height: 100vh; overflow-y: auto; }
     .slideshow { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; }
     .slideshow img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 2s ease-in-out; }
     .slideshow img.active { opacity: 1; }
@@ -18,14 +18,14 @@
     input, select, button { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; font-size: 14px; }
     input, select { background-color: rgba(28, 28, 28, 0.7); color: white; }
     input:focus, select:focus { outline: none; border: 2px solid #00b4d8; background-color: #222; }
-    button { background-color: #00b4d8; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 14px rgba(0,180,216,0.4); transition: 0.3s ease-in-out; }
+    button { background-color: #00b4d8; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 180, 216, 0.4); transition: 0.3s ease-in-out; }
     button:hover { background-color: #0077b6; transform: translateY(-2px); }
     .checkbox { display: flex; align-items: center; gap: 8px; font-size: 13px; color: white; margin: 10px 0; text-align: left; }
-    /* Modal styles */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 2; }
     .modal-content { background: white; color: #333; padding: 20px; border-radius: 8px; max-width: 90%; max-height: 80%; overflow-y: auto; position: relative; }
     .modal-content h3 { margin-top: 0; }
-    .modal-close { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 18px; cursor: pointer; }
+    .modal-close { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.8); border: none; font-size: 24px; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .modal-close:hover { background: rgba(255,255,255,1); }
     footer { text-align: center; color: white; margin: 20px 0; font-size: 14px; }
     footer a { color: #00b4d8; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
@@ -61,7 +61,6 @@
     </select>
     <input type="email" name="correo" placeholder="Correo electrónico" required />
     <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
-    <!-- Honeypot anti-spam -->
     <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
     <div class="checkbox">
       <input type="checkbox" id="terminos" required />
@@ -73,7 +72,7 @@
 
 <footer>
   <p>TIL EXPANSIÓN - CENTRO DE DETAILING PROFESIONAL</p>
-  <p>Oficina Z5: <a href="https://waze.com/ul/h9fxehmh57" target="_blank">Z5, 31-60 11 Avenida B, Zona 5, Guatemala</a></p>
+  <p>Oficina Z5: <a href="https://waze.com/ul/h9fxehmh57" target="_blank">31-60 11 Avenida B, Zona 5, Guatemala</a></p>
   <p>Oficina Mixco: <a href="https://waze.com/ul/h9fxe74q70" target="_blank">18-43 6a Calle, Zona 4, Mixco</a></p>
   <p>Contacto: <a href="mailto:tilexpansiongerencia@gmail.com">tilexpansiongerencia@gmail.com</a> | Tel: 3566 1743</p>
 </footer>
@@ -86,7 +85,6 @@
 </div>
 
 <script>
-  // Slideshow background
   const images = document.querySelectorAll('.slideshow img');
   let index = 0;
   setInterval(() => {
@@ -95,16 +93,17 @@
     images[index].classList.add('active');
   }, 7000);
 
-  // Modal functionality
   const overlay = document.getElementById('modalOverlay');
   const modalText = document.getElementById('modalText');
   const closeBtn = document.getElementById('modalClose');
+
   document.getElementById('linkPrivacy').addEventListener('click', e => {
     e.preventDefault();
     modalText.innerHTML = `<h3>Política de Privacidad</h3>
       <p>Tu privacidad es importante para nosotros. Cualquier información que nos proporciones, como tu nombre o correo electrónico, se utilizará únicamente para contactarte en relación con nuestros servicios o productos. Te garantizamos que tu información no será compartida, vendida ni distribuida a terceros bajo ninguna circunstancia.</p>`;
     overlay.style.display = 'flex';
   });
+
   document.getElementById('linkTerms').addEventListener('click', e => {
     e.preventDefault();
     modalText.innerHTML = `<h3>Términos y Condiciones</h3>
@@ -116,13 +115,13 @@
       </ul>`;
     overlay.style.display = 'flex';
   });
+
   closeBtn.addEventListener('click', () => overlay.style.display = 'none');
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.style.display = 'none'; });
 
-  // Form submission with honeypot and modal feedback
   document.getElementById('formularioCliente').addEventListener('submit', function(e) {
     e.preventDefault();
-    if (this.honeypot.value) return; // spam detected
+    if (this.honeypot.value) return;
     const datos = new FormData(this);
     const url = "https://script.google.com/macros/s/AKfycbzQmdyEg5Ig7HF8I7C0JZVTDmcrECeBLbxPyNoYcYbQF5o5Px2wRz_fA7VVICPmbEkvow/exec";
     fetch(url, { method: 'POST', body: datos })
