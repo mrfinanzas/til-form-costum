@@ -165,12 +165,15 @@
   const closeBtn = document.getElementById('modalClose');
   document.getElementById('linkPrivacy').addEventListener('click', e => {
     e.preventDefault(); modalText.innerHTML = `<h3>Política de Privacidad</h3>
-      <p>Tu privacidad es importante para nosotros. Cualquier información que nos proporciones... </p>`;
+      <p>Tu privacidad es importante para nosotros. Cualquier información que nos proporciones, como tu nombre o correo electrónico, se utilizará únicamente para contactarte en relación con nuestros servicios o productos. Te garantizamos que tu información no será compartida, vendida ni distribuida a terceros bajo ninguna circunstancia.</p>`;
     overlay.style.display = 'flex';
   });
   document.getElementById('linkTerms').addEventListener('click', e => {
     e.preventDefault(); modalText.innerHTML = `<h3>Términos y Condiciones</h3>
-      <ul><li><strong>Uso del Servicio:</strong> ...</li></ul>`;
+    <ul><li><strong>Uso del Servicio:</strong> Nuestros servicios están diseñados para mantenimientos y correcciones posibles a todo tipo de vehículos. Te comprometes a utilizarlos de manera lícita y respetuosa.</li>
+        <li><strong>Información de Contacto:</strong> La información que nos proporciones (como nombre, correo electrónico) se utilizará únicamente para comunicarnos contigo en relación con el servicio o producto que te interese. No compartiremos esta información con terceros, tal como se detalla en nuestra Política de Privacidad.</li>
+        <li><strong>Modificaciones:</strong> Nos reservamos el derecho de modificar estos términos en cualquier momento. Cualquier cambio será efectivo al ser publicado en nuestro sitio web o comunicado por otros medios.</li>
+        <li><strong>Limitación de Responsabilidad:</strong> Hacemos nuestro mejor esfuerzo por mantener la información precisa, pero no garantizamos la disponibilidad continua o la ausencia de errores en el servicio.</li></ul>`;
     overlay.style.display = 'flex';
   });
   closeBtn.addEventListener('click', () => overlay.style.display = 'none');
